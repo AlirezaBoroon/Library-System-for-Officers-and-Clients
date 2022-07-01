@@ -28,7 +28,7 @@
     - All books
     - Specific books (search)
   - Mange Users (Customers)
-    - Approve Registerations
+    - Approve Registrations
     - Ban Users
   - Issue Bill for Returning requests
     - If Customer return the book before 20 days, it costs 0.
@@ -48,4 +48,46 @@
   - Change the password
     - The password should be at least 8 digits
     
-***An Officer Assistant: Notifications system is for checking and inform the officers for new requests which are in the "Waiting" Status.***
+***An Officer Assistant: Notifications system is for checking and informing to the officers for new requests which are in the "Waiting" Status.***
+
+<hr>
+
+## :card_index_dividers:		Customers Data file:
+***Customers Data stores in a file which is "Data_Customers.csv".***
+***This file has this information:***
+  - Username
+    - This is for logging in.
+  - Encrypted Password
+    - The password is encrypted using Affine Cipher.
+  - Name
+    - This is for displaying.
+  - Remaining-requests
+    - Every person has 3 requests for borrowing, every borrowing lower it by 1.
+  - Book-id#1
+    - Every person has borrowed books ids as one of its information.
+    - Every book has an id in the list of books.
+  - #1 date
+    - Every book when is borrowed, has a date of borrowing.
+  - Book-id#2
+  - #2 date
+  - Book-id#3
+  - #3 date
+  - Status
+    - Every Person has a Status in the library:
+      - Approved
+      - Not Approved
+      - Banned
+    - Default value is "Not Approved", others are set by officers.
+<hr>
+
+## :card_file_box:			Officers Data file:
+
+
+<hr>
+
+## :shopping_cart:			Transactions Data file:
+
+
+<hr>
+
+## :books:			Books Data file:
