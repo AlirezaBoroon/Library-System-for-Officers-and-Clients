@@ -1,0 +1,25 @@
+PANDAS:
+Customers_Data.loc[Customers_Data.Username == self.u, "Name"].values.tolist()
+Books_Data.loc[Books_Data.index == i, "Name"].values.tolist()
+Books_Data.loc[Books_Data.index == i, "Name"]= "book_name"
+Customers_Data.loc[Customers_Data.Username == self.u, "Encrypted password"]=
+# equal: Customers_Data["Encrypted password"].where(Customers_Data['Username']== self.u).values.tolist()
+Transactions_Data.loc[(Transactions_Data["Username"] == self.u) & (Transactions_Data["Status"]== "Waiting") & (Transactions_Data["Type of request"]== "Borrowing"), "Book-id"].values.tolist()
+Transactions_Data.loc[(Transactions_Data["Username"] == self.u) & (Transactions_Data["Book-id"]== listofindeces[i]) & (Transactions_Data["Type of request"]== "Borrowing"), "Status"]= "Canceled"
+
+related_t[(related_t["Month"]== 1) & (related_t["Day"]== 18)].count().tolist()
+
+Transactions_Data.iloc[RforBBorr]
+Books_Data.iloc[listofindeces]
+
+Customers_Data[(Customers_Data['Username'] == self.u)].index.tolist()
+BooksRequested["Book-id"].values.tolist()
+Books_Data[Books_Data["Status"]== "accessible"]
+Books_Data['Name'].tolist()
+Customers_Data.append(new_row, ignore_index = True)
+Customers_Data.to_csv('Customers_Data.csv', index=False)
+rankings_pd.rename(columns = {'test':'TEST'}, inplace = True)
+
+
+
+
