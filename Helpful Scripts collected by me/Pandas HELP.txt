@@ -1,0 +1,76 @@
+############## DEFINING THE DATA-CSV AS A DICTIONARY FIRST:
+data = {'set_of_numbers' :  [1,2,3,4,5,np.nan,6,7,np.nan,8,9,10,np.nan]
+              'column_2' : [1,2,3,4,5,6,6,7,,8,8,9,]
+            }
+############## READING:
+* tip: in default: df['..'] is a column, and when we use: df[..., ..] the first one is now the row and the second is the column.
+we read the csv file with this command:
+- df= pd.read_csv("data.csv")
+- use to_string() to print the entire DataFrame.
+- pd.options.display.max_rows : this command shows us how many rows can pandas shows us
+when we use the print(df).
+- reading the columns name by a list: df.columns.values.tolist()
+---
+- pd.read_csv('file_name.csv',usecols=[1,2,3]) # Only reads col1, col2, col3. col0 will be ignored.
+pd.read_csv('file_name.csv',usecols=['Name']) # Only reads 'Name' column. Other columns will be ignored.
+- pd.read_csv('file_name.csv',na_values=['a','b']) # a and b values will be treated as NaN after importing into dataframe.
+- check_for_nan = df['column'].isnull() : checks the invalid data in column (maybe empty cells too)
+- Count the NaN: count_nan = df['column'].isnull().sum() # sum here is for counting the NaN, but why we can't use count? because it can't 
+count the NaN values so we use sum() though the data is NaN, it likes that the value of NaN values, is 1, so sum() of them will sum the 1 s.
+---
+- .reset_index() 
+- To find a row index by its attributs: df[((df['col1'] == '....') & (df['col2'] == '.....'))].index.values # or we can use just one of the columns, when we
+write .index and nothing else next to it, it will give us a int64index and not a pure integer, so we adds .values next to it.
+Hint (Fingilish): df e column mishavad row, hal agar index begzarim, index e row ra midahad ke dar voroodi e df[] an column ra gharar dadeh eem.
+- To find an element index(row(we have column)) by its attributs(element name and column name):
+ElementsOfColumnBetartib= pd.Index(df["column"]) and -> ElementsOfColumnBetartib.get_loc("element name") or:
+ElementsOfColumnBetartib= pd.Index(a list of element(s)) and -> ElementsOfColumnBetartib.get_loc("element name") # we don't know the column but it gives us the row.
+------------
+LOC AND ILOC:
+- To get the row by its row index: df.iloc[index]
+EXAMPLES:
+# Rows:
+-data.iloc[1] # second row of data frame with all the columns
+data.iloc[-1] # last row of data frame with all the columns
+# Columns:
+data.iloc[:,0] # first column of data frame with all the rows
+data.iloc[:,1] # second column of data frame with all the rows
+data.iloc[:,-1] # last column of data frame (id) with all the rows
+Multiple columns and rows can be selected together using the .iloc indexer.
+# Multiple row and column selections using iloc and DataFrame:
+data.iloc[0:5] # first five rows of dataframe with all the columns
+data.iloc[:, 0:2] # first two columns of data frame with all rows
+data.iloc[[0,3,6,24], [0,5,6]] # 1st, 4th, 7th, 25th row + 1st 6th 7th columns.
+-------------
+
+############## CHANGING AND WRITING IN DATA-CSV:
+- To change the name of the indeces: df.index.name= "indeces name"
+- To delete a specific column in pandas we use: df.pop('column') or:
+# Delete multiple columns from the dataframe : data = data.drop(["name1", "name2"], axis=1) # or just one column  ###better
+- To delete a specific row in pandas we use:        data = data.drop(["name1", "name2"], axis=0) # or just one row       ###better
+# axis= 0 is for rows and the axis= 1 is for columns, the default value of axis is 1.
+
+- To sorting the dataframe based on indeces we use: df.sort_index()  but when we want to sort as ascending or descending by another column:
+df.sort_values("column name", ascending= True or False)
+
+- To editing and changing values of a row or rows with column(s):
+df.iloc[[row(s) index],[column(s) index]] = value
+or without index: df.loc[[row(s) index], ['column(s) names']] = value ###better
+df.loc[df.column_name == "155", "another_column_name"] = value #conditional
+- changing the values of a column: df['column'] = df['column'].replace({'this': 'that'})
+
+- To adding and appending a row into our storage: 
+new_row = {'col1': ... , 'col2': .... , 'col3': .....}
+df = df.append(new_row, ignore_index = True)
+
+############## UPDATING THE MAIN CSV DATAFRAME:
+- After changing and editing, we need to update the storage with: df.to_csv('data.csv', index=False)
+
+############## 
+
+
+
+
+
+
+
