@@ -1,0 +1,5 @@
+1. Please enter the absolute addresses of the files in the code (started with c:/...) you store in your computer.
+
+2. Two main file which are Customers.py and Officers.py are the programs that have to execute.
+
+3. All other files are used in the code, the addresses should be exact and absolute.
