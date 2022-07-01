@@ -77,17 +77,70 @@
       - Approved
       - Not Approved
       - Banned
-    - Default value is "Not Approved", others are set by officers.
+      
+      ***Default value is "Not Approved", others are set by officers.***
 <hr>
 
 ## :card_file_box:			Officers Data file:
-
-
+***Officers Data stores in a file which is "Data_Officers.csv".***
+***This file has this information:***
+  - Username
+    - This is for logging in.
+  - Encrypted Password
+    - The password is encrypted using Affine Cipher.
+  - Name
+    - This is for displaying.
+    
+***This data stored in this file, are written manually by editing the file.***
 <hr>
 
 ## :shopping_cart:			Transactions Data file:
-
-
+***Transactions Data stores in a file which is "Data_Transactions.csv".***
+***This file has this information:***
+  - Month
+    - The Month that transaction is made.
+  - Day
+    - The Day that transaction is made.
+  - Hour
+    - The Hour that transaction is made.
+  - Minute
+    - The Minute that transaction is made.
+  - Username
+    - Transaction is made by this Username.
+  - Book-id
+    - Transaction is about this book id.
+  - Status
+    - Waiting
+    - Approved
+    - Canceled
+    
+    ***Default value is "Waiting", for others: "Approved" is set by Officers, "Canceled" is set by the Customer.***
+  - Type of request
+    - Borrowing
+    - Returning
+    - Reserving
+    
+    ***These type of request are based on the request sent by user.***
 <hr>
 
 ## :books:			Books Data file:
+***Books Data stores in a file which is "Data_Books.csv".***
+***This file has this information:***
+  - Name
+    - Book name
+  - Author
+  - Year
+    - Year of publishing
+  - Publisher
+  - Pages
+  - Country
+  - Status
+    - accessible
+    - not accessible
+    
+    ***A book which is not borrowed, its Status is "accessible", otherwise it's "not accessible".***
+  - Reserve-Status
+    - reserved
+    - not reserved
+    
+    ***A book which is borrowed can be "reserved" when Customer make a request for it, otherwise is "not reserved".***
