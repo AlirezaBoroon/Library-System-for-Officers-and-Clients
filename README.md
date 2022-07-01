@@ -143,4 +143,4 @@
     - reserved
     - not reserved
     
-    ***A book which is borrowed can be "reserved" when Customer make a request for it, otherwise is "not reserved".***
+    ***A book which is borrowed can be "reserved" when Customer makes a request for it, otherwise it's "not reserved".***
