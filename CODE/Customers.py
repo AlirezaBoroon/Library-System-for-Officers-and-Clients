@@ -1,8 +1,8 @@
 # This program is used for Clients of Library
-# Every client has it's own data in the Data_Customers.csv file.
+# Every client has its own data in the Data_Customers.csv file.
 # Every client has two main attributes in the Customer class, Username and Password
 # Every password stores as encrypted text in Data_Customers.csv file, no one can know the password even with watching them!.
-# Encryption process uses built-in Affine Cipher with two keys stores in a werid file!.
+# Encryption process uses built-in Affine Cipher with two keys stored in a weird file!.
 # Having keys itself does not help!, we have to have the program code, 'cause it's almost a unique process.
 
 class Person:
@@ -20,14 +20,14 @@ class Customer (Person):
         return Cname[0]
     def Log_in(self):
         Customers_Data= pd.read_csv("C:/Users/A.M.Brn/Desktop/Course Project/CODE/Data_Customers.csv")
-        # every time when we want to read, it is suggested that we have to reac the data again, because sometimes the code uses the old data.
+        # every time when we want to read, it is suggested that we have to read the data again, because sometimes the code uses the old data.
         Uvalidornot= Customers_Data["Encrypted password"].where(Customers_Data['Username']== self.u).values.tolist()
         for i in range(0, len(Uvalidornot)):
             qa= isinstance(Uvalidornot[i], str)
             if qa== True:
                 ciphpass= Uvalidornot[i]
                 break
-        else:# else in python after a loop has a good application, if loop has not broke with break command, the else will be executed.
+        else:# else in python after a loop has a good application, if loop was not broke with break command, the else will be executed.
             return False
         passwordstocheck= Password(self.p)
         Pvalidornot= passwordstocheck.Check(ciphpass)
@@ -54,7 +54,7 @@ class Customer (Person):
             return False
         Customers_Data= Customers_Data.append(new_row, ignore_index = True)
         Customers_Data= Customers_Data.to_csv('C:/Users/A.M.Brn/Desktop/Course Project/CODE/Data_Customers.csv', index=False)
-        # we must to have this equality, which means to edit the Customer_Data.
+        # we must have this equality, which means to edit the Customer_Data.
         return True
     def Changing_Passwords(self):
         newpassobj= Password(self.p)
@@ -64,6 +64,11 @@ class Customer (Person):
         Customers_Data= Customers_Data.to_csv('C:/Users/A.M.Brn/Desktop/Course Project/CODE/Data_Customers.csv', index=False)
         return True
     def Borrowing(self, Booki):
+        Transactions_Data= pd.read_csv("C:/Users/A.M.Brn/Desktop/Course Project/CODE/Data_Transactions.csv")
+        Customers_Data= pd.read_csv("C:/Users/A.M.Brn/Desktop/Course Project/CODE/Data_Customers.csv")
+        if Customers_Data.loc[Customers_Data.Username == self.u, "Remaining-requests"].values.tolist()[0]== 0:
+            print("Error, You don't have any request left for Borrowing.")
+            return False
         print("Are you sure you want to borrow this book?\n1: Yes\n2: No")
         while True:
             choice= int(input())
@@ -75,7 +80,6 @@ class Customer (Person):
         tyofreq= "Borrowing"
         # import datetime as dt
         # t = dt.datetime.now()
-        Transactions_Data= pd.read_csv("C:/Users/A.M.Brn/Desktop/Course Project/CODE/Data_Transactions.csv")
         from datetime import datetime
         month= datetime.now().strftime('%m')
         day= datetime.now().strftime('%d')
@@ -116,7 +120,7 @@ class Customer (Person):
         if len(RforBBorr)== 0:
             return False, 0
         elif len(RforBBorr)== 1:
-            print("The borrowed book are as follows:")
+            print("The borrowed book is as follows:")
             gettingbook= Books_Manager.Getting_viaIndeces(RforBBorr)
             print(gettingbook)
             return True, gettingbook.index.values.tolist()
@@ -149,9 +153,9 @@ class Customer (Person):
             Transactions_Data.loc[(Transactions_Data["Username"] == self.u) & (Transactions_Data["Book-id"]== listofindeces[i]) & (Transactions_Data["Type of request"]== "Borrowing"), "Status"]= "Canceled"
         Transactions_Data= Transactions_Data.to_csv('C:/Users/A.M.Brn/Desktop/Course Project/CODE/Data_Transactions.csv', index=False)
         if len(listofindeces)== 1:
-            print("Cancelling Borrowing request has been done successfully.")
+            print("Canceling Borrowing request has been done successfully.")
         else:
-            print("Cancelling Borrowing request(s) has been done successfully.")
+            print("Canceling Borrowing request(s) has been done successfully.")
         return True
     def Cancelling_Return(self, listofindeces):
         Transactions_Data= pd.read_csv("C:/Users/A.M.Brn/Desktop/Course Project/CODE/Data_Transactions.csv")
@@ -159,9 +163,9 @@ class Customer (Person):
             Transactions_Data.loc[(Transactions_Data["Username"] == self.u) & (Transactions_Data["Book-id"]== listofindeces[i]) & (Transactions_Data["Type of request"]== "Returning"), "Status"]= "Canceled"
         Transactions_Data= Transactions_Data.to_csv('C:/Users/A.M.Brn/Desktop/Course Project/CODE/Data_Transactions.csv', index=False)
         if len(listofindeces)== 1:
-            print("Cancelling Returning request has been done successfully.")
+            print("Canceling Returning request has been done successfully.")
         else:
-            print("Cancelling Returning request(s) has been done successfully.")
+            print("Canceling Returning request(s) has been done successfully.")
         return True
     def Cancelling_Reserve(self, listofindeces):
         Transactions_Data= pd.read_csv("C:/Users/A.M.Brn/Desktop/Course Project/CODE/Data_Transactions.csv")
@@ -169,9 +173,9 @@ class Customer (Person):
             Transactions_Data.loc[(Transactions_Data["Username"] == self.u) & (Transactions_Data["Book-id"]== listofindeces[i]) & (Transactions_Data["Type of request"]== "Reserving"), "Status"]= "Canceled"
         Transactions_Data= Transactions_Data.to_csv('C:/Users/A.M.Brn/Desktop/Course Project/CODE/Data_Transactions.csv', index=False)
         if len(listofindeces)== 1:
-            print("Cancelling Reserving request has been done successfully.")
+            print("Canceling Reserving request has been done successfully.")
         else:
-            print("Cancelling Reserving request(s) has been done successfully.")
+            print("Canceling Reserving request(s) has been done successfully.")
         return True
     def Get_Borroewedindec(self):
         Customers_Data= pd.read_csv("C:/Users/A.M.Brn/Desktop/Course Project/CODE/Data_Customers.csv")
@@ -335,7 +339,7 @@ class Transaction(Customer):
         Transactions_Data= pd.read_csv("C:/Users/A.M.Brn/Desktop/Course Project/CODE/Data_Transactions.csv")
         Books_Data= pd.read_csv("C:/Users/A.M.Brn/Desktop/Course Project/CODE/Data_Books.csv")
         related_t= Transactions_Data[Transactions_Data["Username"]== self.u].reset_index()
-        for i in range(0, len(related_t)):# this is for converting book id to the name of the books of the books dataframe.
+        for i in range(0, len(related_t)):# this is for converting book id to the name of the books of books dataframe.
             j= related_t.loc[related_t.index == i, "Book-id"].tolist()[0]
             book_name= Books_Data.loc[Books_Data.index == int(j), "Name"].values.tolist()[0]
             related_t.loc[related_t.index == i, "Book-id"]= book_name
@@ -371,7 +375,7 @@ class Transaction(Customer):
         plt.grid()
         plt.plot(xs, ys, 'o')
         plt.show()
-        print("The chart which was showed is the visualization of your activity based on days.")
+        print("The chart showed is the visualization of your activity based on days.")
         return True
 def main_fun():
     while True:
@@ -407,7 +411,7 @@ def main_fun():
                     print("Please enter your Password:")
                     password= input()
                     if len(password)<= 7:
-                        print("Please enter a strong password (The password must be at lease 8 digits.)")
+                        print("Please enter a strong password (The password must be at least 8 digits.)")
                         continue
                     else:
                         break
@@ -417,15 +421,15 @@ def main_fun():
                     print("Thank you, You have been Successfully Registered in the library.")
                     continue
                 else:
-                    print("The Username is already exists!, Please try again.")
+                    print("The Username already exists!, Please try again.")
                     continue
             elif choice== 2154:
                 print("Shutting down...")
                 return
         print("Hi", Oldperson.Get_Name(), "welcome.")
-        # Here the program checks that the user account is approved or not.
+        # Here the program checks that the user's account is approved or not.
         app= Oldperson.isApproved()
-        # in python 0 equals to False and otherwise..., so when we have more than two conditions(beside True and False) we don't use boolean.
+        # in python, 0 equals to False and otherwise..., so when we have more than two conditions(beside True and False) we don't use boolean.
         if app== -1:
             print("The officer has banned your account due to a reason, please contact the library.")
             continue
@@ -437,14 +441,14 @@ def main_fun():
             print("1: Getting books table \n2: Borrowing Books \n3: Returning Books \n4: Reservation \n5: Seeing related transactions history \n6: Changing the Password \n7: Logging out")
             choice= int(input())
             if choice== 1:
-                print("Do you want to see all the library books or you want to search a specific book?\n1: All books \n2: Search a book")
+                print("Do you want to see all the library books or you want to search for a specific book?\n1: All books \n2: Search a book")
                 choice= int(input())
                 if choice== 1:
                     print("The library books are as follows:")
                     Books_Manager.Getting_All()
                     print("Hint: The indeces of books are the numbers behind them.")
                 elif choice== 2:
-                    print("Please enter your word:")
+                    print("Please enter your keyword:")
                     searchw= input()
                     Books_Manager.Searching(searchw)
                     print("Hint: The indeces of books are the numbers next to them.")
@@ -470,7 +474,7 @@ def main_fun():
                             Books_Manager.Getting_Availables()
                             print("Hint: The indeces of books are the numbers behind them.")
                         elif choice== 2:
-                            print("Please search your word:")
+                            print("Please search your keyword:")
                             searchw= input()
                             Books_Manager.Searching(searchw)
                             print("Hint: The indeces of books are the numbers behind them.")
@@ -484,7 +488,7 @@ def main_fun():
                         print("You currently don't have any book borrowing request.")
                         continue
                     if waitin_book_fun_reseult[1]== 0:
-                        print("Please enter how many of the book(s) borrowing request(s) you want for cancelling:")
+                        print("Please enter how many of the book(s) borrowing request(s) you want for canceling:")
                         hmany= int(input())
                         listofCanceledBooksBorrReq= []
                         for i in range(0, hmany):
@@ -543,7 +547,7 @@ def main_fun():
                         print("Please enter the book index:")
                         index= int(input())
                     elif choice== 2:
-                            print("Please search your word:")
+                            print("Please search your keyword:")
                             searchw= input()
                             valid_search_or_not= Books_Manager.Searching_inReservation(searchw)
                             print("Hint: The indeces of books are the numbers behind them.")
@@ -558,7 +562,7 @@ def main_fun():
                     if Oldperson.Get_WaitingsReserveR()== False:
                         print("You currently don't have any book reserving request.")
                         continue
-                    print("Please enter how many of the book(s) reserving request(s) you want for cancelling:")
+                    print("Please enter how many of the book(s) reserving request(s) you want for canceling:")
                     hmany= int(input())
                     listof_Canceled_Books_reserve_Req= []
                     for i in range(0, hmany):
@@ -573,7 +577,7 @@ def main_fun():
                 print("Transactions system\nDo you want to see all the related transactions or specific type of your request?\n1: All transactions\n2: See based on type of the requests")
                 choice= int(input())
                 if choice== 1:
-                    print("The below Transactions list is related to you based on your Username and acitivity:")
+                    print("The below Transactions list is related to you based on your Username and activity:")
                     Transaction_obj.All_Transc()
                     print("Do you want to see the visualization of your requests by time?\n1: Yes\n2: No")
                     choice= int(input())
@@ -618,13 +622,13 @@ def main_fun():
                         continue
                 if flag== 0:
                     continue
-                # ^ it helps us that if user cancelled the process, therefore the process will no longer continue.
+                # ^ it helps us that if user canceled the process, therefore the process will no longer continue.
                 while True:
                     while True:
                         print("Now Please enter your new Password:")
                         newpasswordtry1= input()
                         if len(newpasswordtry1)<= 7:
-                            print("Please enter a strong password (The password must be at lease 8 digits.)")
+                            print("Please enter a strong password (The password must be at least 8 digits.)")
                             continue
                         else:
                             break
