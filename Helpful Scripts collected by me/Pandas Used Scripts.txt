@@ -16,8 +16,15 @@ Customers_Data[(Customers_Data['Username'] == self.u)].index.tolist()
 BooksRequested["Book-id"].values.tolist()
 Books_Data[Books_Data["Status"]== "accessible"]
 Books_Data['Name'].tolist()
+
+#### (finglish): vaghti dobare dataframe dar [ ] gharar migire ke mikhahim yek sharti daroonesh bezarim.
+
+
 Customers_Data.append(new_row, ignore_index = True)
 Customers_Data.to_csv('Customers_Data.csv', index=False)
+
+
+
 rankings_pd.rename(columns = {'test':'TEST'}, inplace = True)
 
 
