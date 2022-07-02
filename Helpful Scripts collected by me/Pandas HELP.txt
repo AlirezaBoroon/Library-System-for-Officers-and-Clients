@@ -18,10 +18,10 @@ pd.read_csv('file_name.csv',usecols=['Name']) # Only reads 'Name' column. Other 
 - Count the NaN: count_nan = df['column'].isnull().sum() # sum here is for counting the NaN, but why we can't use count? because it can't 
 count the NaN values so we use sum() though the data is NaN, it likes that the value of NaN values, is 1, so sum() of them will sum the 1 s.
 ---
-- .reset_index() 
+- .reset_index() baraye dataframe ee ke poshteshe indexe jodaee dar nazar migirad.
 - To find a row index by its attributs: df[((df['col1'] == '....') & (df['col2'] == '.....'))].index.values # or we can use just one of the columns, when we
 write .index and nothing else next to it, it will give us a int64index and not a pure integer, so we adds .values next to it.
-Hint (Fingilish): df e column mishavad row, hal agar index begzarim, index e row ra midahad ke dar voroodi e df[] an column ra gharar dadeh eem.
+Hint: df e column mishavad row, hal agar index begzarim, index e row ra midahad ke dar voroodi e df[] an column ra gharar dadeh eem.
 - To find an element index(row(we have column)) by its attributs(element name and column name):
 ElementsOfColumnBetartib= pd.Index(df["column"]) and -> ElementsOfColumnBetartib.get_loc("element name") or:
 ElementsOfColumnBetartib= pd.Index(a list of element(s)) and -> ElementsOfColumnBetartib.get_loc("element name") # we don't know the column but it gives us the row.
