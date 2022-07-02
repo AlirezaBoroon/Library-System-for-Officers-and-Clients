@@ -15,7 +15,7 @@ class Officer (Person):
         Oname= Officers_Data.loc[Officers_Data.Username == self.u, "Name"].values.tolist()
         return Oname[0]
     def Log_in(self):
-        Officers_Data= pd.read_csv("C:/Users/A.M.Brn/Desktop/Course Project/CODE/Data_Officers.csv")# every time when we want to read, it is suggested that we have to reac the data again, because sometimes the code uses the old data.
+        Officers_Data= pd.read_csv("C:/Users/A.M.Brn/Desktop/Course Project/CODE/Data_Officers.csv")# every time when we want to read, it is suggested that we have to read the data again, because sometimes the code uses the old data.
         Uvalidornot= Officers_Data["Encrypted password"].where(Officers_Data['Username']== self.u).values.tolist()
         for i in range(0, len(Uvalidornot)):
             qa= isinstance(Uvalidornot[i], str)
@@ -23,7 +23,7 @@ class Officer (Person):
                 ciphpass= Uvalidornot[i]
                 break
         else:
-            # else in python after a loop has a good application, if loop has not broke with break command, the else will be executed.
+            # else in python after a loop has a good application, if loop was not broke with break command, the else will be executed.
             return False
         passwordstocheck= Password(self.p)
         Pvalidornot= passwordstocheck.Check(ciphpass)
@@ -103,12 +103,12 @@ class Officer (Person):
             if differentday> 20:
                 if differentday<= 7:
                     cost= differentday* 2
-                    print("The Bill costs", cost, "because the customer returned the book about one week late, for days:", differentday)
+                    print("The Bill costs", cost, "because the customer returned the book about one week late, for", differentday, "days.")
                 else:
                     firstcost= 7* 2
                     secondcost= (differentday-7)* 5
                     tcost= firstcost+ secondcost
-                    print("The Bill costs", tcost, "because the customer returned the book more than one week late, for days:", differentday)
+                    print("The Bill costs", tcost, "because the customer returned the book more than one week late, for", differentday, "days.")
             else:
                 print("The Bill costs 0, because the customer returned the book on time.\n")
         else:
@@ -118,7 +118,7 @@ class Officer (Person):
             firstcost= 7* 2
             secondcost= (days-7)* 5
             tcost= firstcost+ secondcost
-            print("The Bill costs", tcost, "because the customer returned the book more than one week late, for days:", days)
+            print("The Bill costs", tcost, "because the customer returned the book more than one week late, for", days, "days.")
         return True
     def Get_WaitingsBorrR():
         Transactions_Data= pd.read_csv("C:/Users/A.M.Brn/Desktop/Course Project/CODE/Data_Transactions.csv")
@@ -130,7 +130,7 @@ class Officer (Person):
         if len(RforBBorr)== 0:
             return False
         elif len(RforBBorr)== 1:
-            print("And the related books to these transactions are:\n")
+            print("And the related book to these transactions is:\n")
             gettingbook= Books_Manager.Getting_viaIndeces(RforBBorr)
             print(gettingbook)
             return True
@@ -149,7 +149,7 @@ class Officer (Person):
         if len(RforBReturn)== 0:
             return False
         elif len(RforBReturn)== 1:
-            print("And the related books to these transactions are:\n")
+            print("And the related book to these transactions is:\n")
             gettingbook= Books_Manager.Getting_viaIndeces(RforBReturn)
             print(gettingbook)
             return True
@@ -168,7 +168,7 @@ class Officer (Person):
         if len(RforBReserve)== 0:
             return False
         elif len(RforBReserve)== 1:
-            print("And the related books to these transactions are:\n")
+            print("And the related book to these transactions is:\n")
             gettingbook= Books_Manager.Getting_viaIndeces(RforBReserve)
             print(gettingbook)
             return True
@@ -178,7 +178,7 @@ class Officer (Person):
             print(gettingbook)
             return True
     def Rejecting_Borr(listofindeces):
-        # for rejecting requests for borrowing
+        # for rejecting requests of borrowing
         Transactions_Data= pd.read_csv("C:/Users/A.M.Brn/Desktop/Course Project/CODE/Data_Transactions.csv")
         for i in range(0, len(listofindeces)):
             Transactions_Data.loc[Transactions_Data.index == listofindeces[i], "Status"]= "Rejected"
@@ -187,13 +187,13 @@ class Officer (Person):
         return True
     def Approving_Borr(listofindeces):
         # approving Borrowing reqs by officers.
+        import math
         Customers_Data= pd.read_csv("C:/Users/A.M.Brn/Desktop/Course Project/CODE/Data_Customers.csv")
         Books_Data= pd.read_csv("C:/Users/A.M.Brn/Desktop/Course Project/CODE/Data_Books.csv")
         Transactions_Data= pd.read_csv("C:/Users/A.M.Brn/Desktop/Course Project/CODE/Data_Transactions.csv")
         for i in range(0, len(listofindeces)):
             u= Transactions_Data.loc[Transactions_Data.index == listofindeces[i], "Username"].values.tolist()[0]
-            q= Customers_Data.loc[Customers_Data.Username == u, "Remaining-requests"].values.tolist()[0]
-            if q== 3:
+            if math.isnan(Customers_Data.loc[Customers_Data.Username == u, "Book-id#1"]):
                 Transactions_Data.loc[Transactions_Data.index == listofindeces[i], "Status"]= "Approved"
                 j= Transactions_Data.loc[Transactions_Data.index == listofindeces[i], "Book-id"].tolist()[0]
                 Books_Data.loc[Books_Data.index == int(j), "Status"]= 'not accessible'
@@ -205,7 +205,7 @@ class Officer (Person):
                 if (Customers_Data.loc[Customers_Data.Username == u, "Remaining-requests"].values.tolist()[0]> 0):
                     Customers_Data.loc[Customers_Data.Username == u, "Remaining-requests"]= Customers_Data.loc[Customers_Data.Username == u, "Remaining-requests"]- 1
                     print("Approving Borrowing request has been done successfully.")
-            elif q== 2:
+            elif math.isnan(Customers_Data.loc[Customers_Data.Username == u, "Book-id#2"]):
                 Transactions_Data.loc[Transactions_Data.index == listofindeces[i], "Status"]= "Approved"
                 j= Transactions_Data.loc[Transactions_Data.index == listofindeces[i], "Book-id"].tolist()[0]
                 Books_Data.loc[Books_Data.index == int(j), "Status"]= 'not accessible'
@@ -217,7 +217,7 @@ class Officer (Person):
                 if (Customers_Data.loc[Customers_Data.Username == u, "Remaining-requests"].values.tolist()[0]> 0):
                     Customers_Data.loc[Customers_Data.Username == u, "Remaining-requests"]= Customers_Data.loc[Customers_Data.Username == u, "Remaining-requests"]- 1
                     print("Approving Borrowing request has been done successfully.")
-            elif q== 1:
+            elif math.isnan(Customers_Data.loc[Customers_Data.Username == u, "Book-id#3"]):
                 Transactions_Data.loc[Transactions_Data.index == listofindeces[i], "Status"]= "Approved"
                 j= Transactions_Data.loc[Transactions_Data.index == listofindeces[i], "Book-id"].tolist()[0]
                 Books_Data.loc[Books_Data.index == int(j), "Status"]= 'not accessible'
@@ -230,7 +230,7 @@ class Officer (Person):
                     Customers_Data.loc[Customers_Data.Username == u, "Remaining-requests"]= Customers_Data.loc[Customers_Data.Username == u, "Remaining-requests"]- 1
                     print("Approving Borrowing request has been done successfully.")
             else:
-                print("The User has not enough remaining-requests.")
+                print("The User doesn't have enough remaining-requests.")
                 Transactions_Data.loc[Transactions_Data.index == listofindeces[i], "Status"]= "Rejected"
                 return False
         Customers_Data= Customers_Data.to_csv('C:/Users/A.M.Brn/Desktop/Course Project/CODE/Data_Customers.csv', index=False)
@@ -255,34 +255,35 @@ class Officer (Person):
         # Here actually just one request will be approved.
         for i in range(0, len(listofindeces)):
             u= Transactions_Data.loc[Transactions_Data.index == listofindeces[i], "Username"].values.tolist()[0]
-            rq= Customers_Data.loc[Customers_Data.Username == u, "Remaining-requests"].values.tolist()
-            if rq[0]== 2:
+            j= Transactions_Data.loc[Transactions_Data.index == listofindeces[i], "Book-id"].values.tolist()
+            if len(j)== 0:
+                print("The Transaction does not exist!.")
+                return False
+            if Customers_Data.loc[Customers_Data.Username == u, "Book-id#1"].values.tolist()[0]== j[0]:
                 Transactions_Data.loc[Transactions_Data.index == listofindeces[i], "Status"]= "Approved"
-                j= Transactions_Data.loc[Transactions_Data.index == listofindeces[i], "Book-id"]
-                Books_Data.loc[Books_Data.index == int(j), "Status"]= 'accessible'
+                Books_Data.loc[Books_Data.index == int(j[0]), "Status"]= 'accessible'
                 Customers_Data.loc[Customers_Data.Username == u, "Book-id#1"]= math.nan
                 tt.append(Customers_Data.loc[Customers_Data.Username == u, "#1 date"].values.tolist()[0])
                 Customers_Data.loc[Customers_Data.Username == u, "#1 date"]= math.nan
                 Customers_Data.loc[Customers_Data.Username == u, "Remaining-requests"]= Customers_Data.loc[Customers_Data.Username == u, "Remaining-requests"]+ 1
                 print("Approving Returning request has been done successfully.")
-            elif rq[0]== 1:
+            elif Customers_Data.loc[Customers_Data.Username == u, "Book-id#2"].values.tolist()[0]== j[0]:
                 Transactions_Data.loc[Transactions_Data.index == listofindeces[i], "Status"]= "Approved"
-                j= Transactions_Data.loc[Transactions_Data.index == listofindeces[i], "Book-id"]
-                Books_Data.loc[Books_Data.index == int(j), "Status"]= 'accessible'
+                Books_Data.loc[Books_Data.index == int(j[0]), "Status"]= 'accessible'
                 Customers_Data.loc[Customers_Data.Username == u, "Book-id#2"]= math.nan
                 tt.append(Customers_Data.loc[Customers_Data.Username == u, "#2 date"].values.tolist()[0])
                 Customers_Data.loc[Customers_Data.Username == u, "#2 date"]= math.nan
                 Customers_Data.loc[Customers_Data.Username == u, "Remaining-requests"]= Customers_Data.loc[Customers_Data.Username == u, "Remaining-requests"]+ 1
                 print("Approving Borrowing request has been done successfully.")
-            elif rq[0]== 0:
+            elif Customers_Data.loc[Customers_Data.Username == u, "Book-id#3"].values.tolist()[0]== j[0]:
                 Transactions_Data.loc[Transactions_Data.index == listofindeces[i], "Status"]= "Approved"
-                j= Transactions_Data.loc[Transactions_Data.index == listofindeces[i], "Book-id"]
-                Books_Data.loc[Books_Data.index == int(j), "Status"]= 'accessible'
+                Books_Data.loc[Books_Data.index == int(j[0]), "Status"]= 'accessible'
                 Customers_Data.loc[Customers_Data.Username == u, "Book-id#3"]= math.nan
                 tt.append(Customers_Data.loc[Customers_Data.Username == u, "#3 date"].values.tolist()[0])
                 Customers_Data.loc[Customers_Data.Username == u, "#3 date"]= math.nan
                 Customers_Data.loc[Customers_Data.Username == u, "Remaining-requests"]= Customers_Data.loc[Customers_Data.Username == u, "Remaining-requests"]+ 1
                 print("Approving Borrowing request has been done successfully.")
+        # Notice: after all the processes of above are done!(not just one of them) then we apply changes for all the storages.
         Customers_Data= Customers_Data.to_csv('C:/Users/A.M.Brn/Desktop/Course Project/CODE/Data_Customers.csv', index=False)
         Books_Data= Books_Data.to_csv('C:/Users/A.M.Brn/Desktop/Course Project/CODE/Data_Books.csv', index=False)
         Transactions_Data= Transactions_Data.to_csv('C:/Users/A.M.Brn/Desktop/Course Project/CODE/Data_Transactions.csv', index=False)
@@ -387,7 +388,7 @@ class Transaction(Officer):
     def All_Transc():
         Books_Data= pd.read_csv("C:/Users/A.M.Brn/Desktop/Course Project/CODE/Data_Books.csv")
         related_t= pd.read_csv("C:/Users/A.M.Brn/Desktop/Course Project/CODE/Data_Transactions.csv")
-        for i in range(0, len(related_t)):# this is for converting book id to the name of the books of the books dataframe.
+        for i in range(0, len(related_t)):# this is for converting book id to the name of the books of books dataframe.
             j= related_t.loc[related_t.index == i, "Book-id"]
             book_name= Books_Data.loc[Books_Data.index == int(j), "Name"].values.tolist()[0]
             related_t.loc[related_t.index == i, "Book-id"]= book_name
@@ -454,7 +455,7 @@ def Notifications_Sys():
         if resvs> 0:
             print("*Notification:", resvs, "number of new Reserving request(s).")
         time.sleep(1)
-        # checks every 1 seconds.
+        # checks every 1 second.
 def main_fun(): 
     while True:
         print("***Officers Program***")
@@ -568,7 +569,7 @@ def main_fun():
                             else:
                                 print("Canceled.")
                                 continue
-                        if choice== 2:
+                        elif choice== 2:
                             print("Please enter number of transactions which you want to reject their returning requests:")
                             hmany= int(input())
                             listofRejectedBooksReturnReq= []
@@ -717,8 +718,8 @@ import threading
 t1 = threading.Thread(target= Notifications_Sys)
 t2 = threading.Thread(target= main_fun)
 # starting thread 1
-# starting thread 2
 t1.start()
+# starting thread 2
 t2.start()
 t1.join()
 t2.join()
