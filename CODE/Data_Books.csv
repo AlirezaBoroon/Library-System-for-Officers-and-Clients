@@ -1,6 +1,7 @@
-Username,Encrypted password,Name,Remaining-requests,Book-id#1,#1 date,Book-id#2,#2 date,Book-id#3,#3 date,Status
-mbrr1,7å®Pi1)¥J,Mohammad,3.0,,,,,,,Banned
-alirezab1,7å®Pi1)¥J,Alireza,3.0,,,,,,,Approved
-alirezabb,7å®Pi1)¥J,Alireza Boroon,3.0,,,,,,,Approved
-alireza,7å®Pi1)¥J,Alireza,3.0,,,,,,,Banned
-roz12,7å®Pi1)¥J,Rozhan,3.0,,,,,,,Not Approved
+Name,Author,Year,Publisher,Pages,Country,Status,Reserve-Status
+Riazi (basics),Karimi,1990,Dana,190.0,Iran,accessible,not reserved
+Dini (Jewish),Rezaee,2009,NiaBook,302,U.S,accessible,not reserved
+Riazi 2,Karimi,2019,Dana,289.0,Turkey,accessible, not reserved
+Riazi 3,Noorani,1992,Rahnama,290.0,Iran,accessible,not reserved
+Zaban 1,Hatami,2016,Kosar,77.0,Iran,not accessible,not reserved
+Physics,R. Mohammadi,2006,Razi,120.0,Iran,accessible,not reserved
