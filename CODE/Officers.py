@@ -1,6 +1,10 @@
 # This program is for Officers of the Library.
 # You can test the project with running these two programs (Officers.py & Customers.py)
 
+from calendar import c
+from multiprocessing import Condition
+
+
 class Person:
     def __init__(self, Username, Password):
         self.u= Username
@@ -51,6 +55,9 @@ class Officer (Person):
                 break
         if cm== 1:
             print(Customers_Data)
+            if Customers_Data.empty== True:
+                print("The specific list is empty.")
+                return False
         elif cm== 2:
             Customers_DataU= Customers_Data['Username'].tolist()
             print("Please enter your keyword:")
@@ -61,12 +68,12 @@ class Officer (Person):
                     search_in_users_ideces.append(i)     
             userswithword= Customers_Data.iloc[search_in_users_ideces] 
             print(userswithword)
-        if Customers_Data.empty== True or userswithword.empty== True:
-            print("The specific list is empty.")
-            return False
+            if userswithword.empty== True:
+                print("The specific list is empty.")
+                return False
         print("\nPlease enter the index of user:")
         user_i= int(input())
-        print("1: Approve user\n2: Ban user")
+        print("1: Approve user\n2: Ban user\n3: Do nothing.")
         while True:
             muchoice= int(input())
             if muchoice== 1:
@@ -78,6 +85,9 @@ class Officer (Person):
                 Customers_Data.loc[Customers_Data.index == user_i, "Status"]= "Banned"
                 Customers_Data.to_csv('C:/Users/A.M.Brn/Desktop/Course Project/CODE/Data_Customers.csv', index=False)
                 print("The Banned Status has been set for the user.")
+                break
+            elif muchoice== 3:
+                print("-------")
                 break
         return True
     def Issue_Bill(user, timel):
@@ -380,6 +390,35 @@ class Books_Manager:
                 searchinbooksideces.append(i)     
         bookswithword= Books_Data.iloc[searchinbooksideces] 
         print(bookswithword)
+    def AddNewBook():
+        Books_Data= pd.read_csv("C:/Users/A.M.Brn/Desktop/Course Project/CODE/Data_Books.csv")
+        print("Adding a New Book to the library:")
+        print("Please enter: Book name")
+        book_name= input()
+        print("Enter: Author")
+        book_author= input()
+        print("Enter: Year")
+        book_year= input()
+        print("Enter: Publisher")
+        book_publisher= input()
+        print("Enter: Pages")
+        book_pages= input()
+        print("Enter: Country")
+        book_country= input()
+        print("Is the book accessible? 1: Yes / 0: No")
+        while True:
+            choice= input()
+            if choice== '1':
+                book_accessible= 'accessible'
+                break
+            elif choice== '0':
+                book_accessible= 'not accessible'
+                break
+        new_book= {'Name':book_name, 'Author':book_author,'Year':book_year,'Publisher':book_publisher,'Pages':book_pages, 'Country':book_country, 'Status': book_accessible, 'Reserve-Status':'not reserved'}
+        Books_Data= Books_Data.append(new_book, ignore_index = True)
+        Books_Data= Books_Data.to_csv('C:/Users/A.M.Brn/Desktop/Course Project/CODE/Data_Books.csv', index=False)
+        print("Done, The book has been added.\n")
+        return True
 class Transaction(Officer):
     def __init__(self, Username, Password):
         super().__init__(Username, Password)
@@ -490,10 +529,10 @@ def main_fun():
             print("Hi officer", Oldperson.Get_Name(), "welcome to the Officer panel.")
             print("The Main Menu:")
             while True:
-                print("1: Getting all books table \n2: Borrowing Requests \n3: Returning Requests \n4: Reserving Requests \n5: Seeing Transactions history \n6: Changing the Password \n7: Managing customers accounts \n8: Logging out")
+                print("1: Books Management \n2: Borrowing Requests \n3: Returning Requests \n4: Reserving Requests \n5: Seeing Transactions history \n6: Changing the Password \n7: Managing customers accounts \n8: Logging out")
                 choice= int(input())
                 if choice== 1:
-                    print("Do you want to see all the library books or you want to search a specific book?\n1: All books \n2: Search a book")
+                    print("1: All books \n2: Search for book(s) \n3: Add a New Book")
                     choice= int(input())
                     if choice== 1:
                         print("The library books are as follows:")
@@ -504,6 +543,20 @@ def main_fun():
                         searchw= input()
                         Books_Manager.Searching(searchw)
                         print("Hint: The indeces of books are the numbers next to them.")
+                    elif choice== 3:
+                        print("Are you sure you want to add a new book to the library list of books? 1: Yes / 0: No")
+                        flag= 1
+                        while True:
+                            choice= input()
+                            if choice== '1':
+                                break
+                            elif choice== '0':
+                                flag= 0
+                                print("Canceled")
+                                break
+                        if flag== 0:
+                            continue
+                        Books_Manager.AddNewBook()
                 elif choice== 2:
                     print("* Approving and Rejecting Customers borrowing requests. *")
                     waitin_book_fun_reseult= Officer.Get_WaitingsBorrR()
