@@ -205,10 +205,10 @@ class Customer (Person):
         print("Returning request has been sent to the library officer successfully.")
     def Get_reserve(self):
         Transactions_Data= pd.read_csv("C:/Users/A.M.Brn/Desktop/Course Project/CODE/Data_Transactions.csv")
-        if (Transactions_Data.loc[(Transactions_Data["Username"] == 'mbrn1') & (Transactions_Data["Type of request"]== "Reserving") & (Transactions_Data["Status"]== "Approved")]).count().tolist()[0]!= 0:
+        if (Transactions_Data.loc[(Transactions_Data["Username"] == self.u) & (Transactions_Data["Type of request"]== "Reserving") & (Transactions_Data["Status"]== "Approved")]).count().tolist()[0]!= 0:
             print("Your request for reserving is now approved by officer, please get your book.")
         else:
-            print("Your request is not yet approved by officer.")
+            print("Your request is not approved by officer yet.")
         return True
 class Password:
     def __init__(self, String):
@@ -279,6 +279,10 @@ class Books_Manager:
         Books_Data= pd.read_csv("C:/Users/A.M.Brn/Desktop/Course Project/CODE/Data_Books.csv")
         BookswithIndc= Books_Data.iloc[listofindeces]
         return BookswithIndc
+    def Getting_Reservables():
+        Books_Data= pd.read_csv("C:/Users/A.M.Brn/Desktop/Course Project/CODE/Data_Books.csv")
+        not_reservedB= Books_Data[Books_Data["Reserve-Status"]== "not reserved"]
+        print(not_reservedB)
     def Searching(Word):
         Books_Data= pd.read_csv("C:/Users/A.M.Brn/Desktop/Course Project/CODE/Data_Books.csv")
         BooksNames= Books_Data['Name'].tolist()
@@ -547,6 +551,13 @@ def main_fun():
                         print("Please enter the book index:")
                         index= int(input())
                     elif choice== 2:
+                        print("1: All Reservable books\n2: search for a book")
+                        choice= int(input())
+                        if choice== 1:
+                            print("The Reservable library books are as follows:")
+                            Books_Manager.Getting_Reservables()
+                            print("Hint: The indeces of books are the numbers behind them.")
+                        elif choice== 2:
                             print("Please search your keyword:")
                             searchw= input()
                             valid_search_or_not= Books_Manager.Searching_inReservation(searchw)
@@ -554,8 +565,8 @@ def main_fun():
                             if valid_search_or_not== False:
                                 print("There is not any book reservable with the word you entered.")
                                 continue
-                            print("Now please enter the book index:")
-                            index= int(input())
+                        print("Now please enter the book index:")
+                        index= int(input())
                     if Oldperson.Reserving(index)== False:
                         print("The process canceled.")
                 elif choice== 2:
