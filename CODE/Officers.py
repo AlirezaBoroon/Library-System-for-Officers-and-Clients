@@ -1,10 +1,6 @@
 # This program is for Officers of the Library.
 # You can test the project with running these two programs (Officers.py & Customers.py)
 
-from calendar import c
-from multiprocessing import Condition
-
-
 class Person:
     def __init__(self, Username, Password):
         self.u= Username
@@ -325,14 +321,14 @@ class Password:
         dceo= open("C:/Users/A.M.Brn/Desktop/Course Project/CODE/¢OHah.]z€a.txt", "r")
         b= int(dceo.readline())
         a= int(dceo.readline())
-        strL2indexes= []
+        strL2indeces= []
         for i in range (0, len(strL)):
             for j in range (0, len(alphabet)):
                 if alphabet[j]== strL[i]:
-                    strL2indexes.append(j)
+                    strL2indeces.append(j)
         converted_numeric_list= []
-        for i in range (0, len(strL2indexes)):
-            n= (a*strL2indexes[i])+b
+        for i in range (0, len(strL2indeces)):
+            n= (a*strL2indeces[i])+b
             while n> 100:
                 n= n- 101
             converted_numeric_list.append(n)
@@ -352,14 +348,14 @@ class Password:
         dceo = open("C:/Users/A.M.Brn/Desktop/Course Project/CODE/¢OHah.]z€a.txt", "r")
         b= int(dceo.readline())
         a= int(dceo.readline())
-        strL2indexes= []
+        strL2indeces= []
         for i in range (0, len(strL)):
             for j in range (0, len(alphabet)):
                 if alphabet[j]== strL[i]:
-                    strL2indexes.append(j)
+                    strL2indeces.append(j)
         converted_numeric_list= []
-        for i in range (0, len(strL2indexes)):
-            n= (a*strL2indexes[i])+b
+        for i in range (0, len(strL2indeces)):
+            n= (a*strL2indeces[i])+b
             while n> 100:
                 n= n- 101
             converted_numeric_list.append(n)
