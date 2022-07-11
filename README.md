@@ -1,7 +1,7 @@
 # Library System for Officers and Clients
 - ***Library Project contains two main codes, one is for Customers(=Cliens) and another is for the Officers.***
 
-## :man_student: / :woman_student:	Customers Program:
+## :man_student: / :woman_student:	Customers Program (Customers.py):
 - Clients are able to do:
   - View all books of Library
   - Borrow book up to 3 books
@@ -22,7 +22,7 @@
     - The password should be at least 8 digits
 <hr>
 
-## :woman_office_worker: / :man_office_worker:	Officers Program:
+## :woman_office_worker: / :man_office_worker:	Officers Program (Officers.py):
 - Officers are able to do:
   - View all books of Library
     - All books
