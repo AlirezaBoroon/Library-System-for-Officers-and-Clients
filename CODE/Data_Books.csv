@@ -1,7 +1,7 @@
 Name,Author,Year,Publisher,Pages,Country,Status,Reserve-Status
-Riazi (basics),Karimi,1990,Dana,190.0,Iran,accessible,not reserved
-Dini (Jewish),Rezaee,2009,NiaBook,302,U.S,accessible,not reserved
-Riazi 2,Karimi,2019,Dana,289.0,Iran,accessible, not reserved
-Riazi 3,Noorani,1992,Rahnama,290.0,Iran,accessible,not reserved
-Zaban 1,Hatami,2016,Kosar,77.0,Iran,not accessible,not reserved
+Math (basics),Karimi,1990,Dana,190.0,Iran,accessible,not reserved
+Religion (Judaism),Rezaee,2009,NiaBook,302,U.S,accessible,not reserved
+Math 2,Karimi,2019,Dana,289.0,Iran,accessible, not reserved
+Math 3,Noorani,1992,Rahnama,290.0,Iran,accessible,not reserved
+English 1,Hatami,2016,Kosar,77.0,Iran,not accessible,not reserved
 Physics,R. Mohammadi,2006,Razi,120.0,Iran,accessible,not reserved
