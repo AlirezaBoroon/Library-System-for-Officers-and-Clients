@@ -4,6 +4,7 @@
 # Every password stores as encrypted text in Data_Customers.csv file, no one can know the password even with watching them!.
 # Encryption process uses built-in Affine Cipher with two keys stored in a weird file!.
 # Having keys itself does not help!, we have to have the program code, 'cause it's almost a unique process.
+# *Notice: Please change every address of each file in the code to prevent the directory Error.
 
 class Person:
     def __init__(self, Username, Password):
