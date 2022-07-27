@@ -1,5 +1,6 @@
 # This program is for Officers of the Library.
 # You can test the project with running these two programs (Officers.py & Customers.py)
+# *Notice: Please change every address of each file in the code to prevent the directory Error.
 
 class Person:
     def __init__(self, Username, Password):
