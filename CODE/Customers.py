@@ -1,9 +1,9 @@
 # This program is used for Clients of Library
 # Every client has its own data in the Data_Customers.csv file.
 # Every client has two main attributes in the Customer class, Username and Password
-# Every password stores as encrypted text in Data_Customers.csv file, no one can know the password even with watching them!.
+# Every password stores as encrypted text in Data_Customers.csv file, no one can know the password even with watching them! (Customers Data).
 # Encryption process uses built-in Affine Cipher with two keys stored in a weird file!.
-# Having keys itself does not help!, we have to have the program code, 'cause it's almost a unique process.
+# Having keys itself does not help!, we have to have the program code, because it's a unique process.
 # *Notice: Please change every address of each file in the code to prevent the directory Error.
 
 class Person:
